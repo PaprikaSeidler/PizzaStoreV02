@@ -17,43 +17,12 @@ namespace PizzaStoreV02
             Pizza p2 = new Pizza("Magarita", 60);
             Pizza p3 = new Pizza("Ufo", 80);
 
-            Menu.Create(p1);
-            Menu.Create(p2);
-            Menu.Create(p3);
+            Menu.AddToMenu(p1);
+            Menu.AddToMenu(p2);
+            Menu.AddToMenu(p3);
 
-
-
-            Console.WriteLine($"The menu: \n");
-            Menu.PrintMenu();
-            Console.WriteLine();
-
-            ////Menu.Update();
-            //Menu.PrintMenu();
-
-            //Console.WriteLine("Search for a pizza by menu no.:");
-            //int userInput = int.Parse(Console.ReadLine());
-            //Menu.Search(userInput);
-            //Console.WriteLine();
-
-            //Console.WriteLine("Choose pizza to delete:");
-            //int userInput2 = int.Parse(Console.ReadLine());
-            //Menu.Delete(userInput2);
-
-            //Console.WriteLine();
-            //Menu.PrintMenu();
-            //Console.WriteLine();
-
-            //Console.WriteLine("Choose pizza no. to update:");
-            //int userInput3 = int.Parse(Console.ReadLine());
-            //Menu.Update(userInput3);
-
-            //Menu.PrintMenu();
-
-            Console.WriteLine("Create new pizza:");
-            //var userInput4 = var.Parse(Console.ReadLine());
-            Menu.NewPizza();
-            Menu.PrintMenu();
-
+            UserDialog userDialog = new UserDialog(Menu);
+            userDialog.UI();
         }
     }
 }

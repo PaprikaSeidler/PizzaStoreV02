@@ -1,116 +1,158 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace PizzaStoreV02
 {
-    public class MenuCatalog
+    public class MenuCatalog // TODO Lav CSS
     {
 
         private List<Pizza> _pizzas = new List<Pizza>();
 
-        public void Create(Pizza pizza)
+        public void AddToMenu(Pizza pizza)
         {
             _pizzas.Add(pizza);
         }
 
-        public Pizza NewPizza()
+        public Pizza NewPizza(Pizza pizza)
         {
-            Pizza pizza = new Pizza()
+            try
             {
-                Name = Console.ReadLine(),
-                Price = int.Parse(Console.ReadLine())
-            };
-            //Console.WriteLine("Choose new name:");
-            //pizza.Name = Console.ReadLine();
-            //Console.WriteLine("Choose new price:");
-            //pizza.Price = int.Parse(Console.ReadLine());
-            //Console.WriteLine();
-
-            _pizzas.Add(pizza);
-
-            return pizza;
-
-        }
-
-        public Pizza Delete(int number)
-        {
-            bool deletion = false;
-            foreach (Pizza p in _pizzas)
-            {
-                if (p.MenuNo == number)
+                
+                //Console.WriteLine("Choose new name:");
+                //pizza.Name = Console.ReadLine();
+                //Console.WriteLine("Choose new price:");
+                //pizza.Price = int.Parse(Console.ReadLine());
+                //Console.WriteLine();
+                
+                if (pizza.Price >= 0)
+                    {
+                    _pizzas.Add(pizza);
+                    Console.WriteLine("Pizza created successfully");
+                    return pizza;
+                    }
+                if (pizza.Price < 0)
                 {
-                    _pizzas.Remove(p);
-                    Console.WriteLine($"You deleted pizza no. {p.MenuNo}. {p.Name}");
-                    deletion = true;
-                    break;
+                    throw new Exception();
                 }
+                
             }
-
-            if (deletion)
+            catch (FormatException e) 
             {
-                Pizza.ResetMenuNo();
-                foreach (Pizza p in _pizzas)
-                {
-                    p.MenuNo = Pizza.MenuNr();
-                }
+                Console.WriteLine(e.Message);                       // TODO "prøv igen"-funktion 
+            }                                                       // Ellers virker den
+            catch (Exception)
+            {
+                Console.WriteLine("Price must be a number > 0");
             }
             return null;
         }
 
-
+                                        // Virker :-)
+        public Pizza Delete(int number) 
+        {
+            try
+            {
+                bool deletion = false;
+                foreach (Pizza p in _pizzas)
+                {
+                    if (p.MenuNo == number)
+                    {
+                        _pizzas.Remove(p);
+                        Console.WriteLine($"You deleted pizza no. {p.MenuNo}. {p.Name}");
+                        
+                        deletion = true;
+                    
+                        if (deletion)
+                        {
+                            Pizza.ResetMenuNo();
+                            foreach (Pizza pi in _pizzas)
+                            {
+                                pi.MenuNo = Pizza.MenuNr();
+                            }
+                        }
+                        return p;
+                    }
+                }
+                throw new Exception($"No pizza found with menu number {number}");
+            }
+            catch (FormatException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return null;
+        }
 
 
         public void PrintMenu()
         {
             foreach (Pizza p in _pizzas)
             {
-                Console.WriteLine($"{p}");
+                Console.WriteLine(p);
             }
         }
 
         public Pizza Search(int number)
         {
-            foreach (Pizza p in _pizzas)
+            try
             {
-                if (p.MenuNo == number)
+                foreach (Pizza p in _pizzas)
                 {
-                    Console.WriteLine($"Name: {p.Name} \nPrice: {p.Price}");
-                    return p;
+                    if (p.MenuNo == number)
+                    {
+                        Console.WriteLine($"Name: {p.Name} \nPrice: {p.Price}");
+                        return p;
+                    }
                 }
+                throw new Exception($"No pizza found with menu number {number}");
+            }
+            catch (FormatException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
             return null;
-
-            //if (!found)
-            //{
-            //NotFoundException ex = new NotFoundException();
-            //throw ex;
-            //Console.WriteLine("Not found");
-            //}
-
-            
         }
+
 
         public Pizza Update(int number)
         {
-            foreach (Pizza p in _pizzas)
+            try
             {
-                if (p.MenuNo == number)
+                foreach (Pizza p in _pizzas)
                 {
-                    Console.WriteLine("Choose new name:");
-                    p.Name = Console.ReadLine();
-                    Console.WriteLine("Choose new price:");
-                    p.Price = int.Parse(Console.ReadLine());
-                    Console.WriteLine();
+                    if (p.MenuNo == number)
+                        {
+                        Console.WriteLine("Choose new name:");
+                        p.Name = Console.ReadLine();
+                        Console.WriteLine("Choose new price:");
+                        p.Price = int.Parse(Console.ReadLine());
+                        Console.WriteLine();
+                        return p;
+                        }
                 }
-            return p;
+                throw new Exception($"No pizza found with menu number {number}");
             }
-
+            catch (FormatException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Pizza not updated. {e.Message}");
+            }
             return null;    
         }
-
     }
 }

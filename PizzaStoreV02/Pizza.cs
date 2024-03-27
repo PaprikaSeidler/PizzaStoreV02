@@ -11,7 +11,7 @@ namespace PizzaStoreV02
     public class Pizza
     {         
          private static int _menuNo = 1;
-         public static void ResetMenuNo()
+         public static void ResetMenuNo()       
          { 
              _menuNo = 0; 
          }
@@ -25,7 +25,6 @@ namespace PizzaStoreV02
              Price = price;
          }
 
-        //
         public Pizza() 
         {
             MenuNo = _menuNo;
@@ -48,6 +47,11 @@ namespace PizzaStoreV02
         public override string ToString()
         {
             return $"No.: {MenuNo}. {Name}, {Price} kr.";
+        }
+
+        public static Pizza Parse(string input)
+        {
+            return new Pizza();
         }
     }
 }

@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace PizzaStoreV02
 {
-    internal class NotFoundException : Exception
+    internal class NoPizzaFoundException : Exception
     {
-            public NotFoundException()
-            { }
+        public NoPizzaFoundException()
+        { }
 
-            public NotFoundException(string message)
-                : base(message)
-            { }
-        
+        public NoPizzaFoundException(string message) : base(message)
+        { }
+
     }
 }
