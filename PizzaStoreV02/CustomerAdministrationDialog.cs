@@ -88,17 +88,17 @@ namespace PizzaStoreV02
 
                         try
                         {
-                            //Console.Clear();
-                            //Console.WriteLine("Enter the new customer's name:");
-                            //string customerName = Console.ReadLine();
-                            //Console.WriteLine("Enter the new customer's address:");
-                            //string customerAddress = Console.ReadLine();
-                            //Console.WriteLine("Enter the new customer's phone number:");
-                            //string customerPhoneNo = Console.ReadLine();
-                            //Customer newCustomer = new Customer(customerName, customerAddress, customerPhoneNo);
-
-
                             Console.Clear();
+                            Console.WriteLine("Enter the new customer's name:");
+                            string customerName = Console.ReadLine();
+                            Console.WriteLine("Enter the new customer's address:");
+                            string customerAddress = Console.ReadLine();
+                            Console.WriteLine("Enter the new customer's phone number:");
+                            string customerPhoneNo = Console.ReadLine();
+                            Customer newCustomer = new Customer(customerName, customerAddress, customerPhoneNo);
+
+
+                            
 
                             _customerCatalog.NewCustomer(Customer.Parse(Console.ReadLine()));
                             

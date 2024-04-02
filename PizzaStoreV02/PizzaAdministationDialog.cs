@@ -13,10 +13,12 @@ namespace PizzaStoreV02
     {
         private MenuCatalog _menuCatalog;
 
-        public PizzaAdministationDialog(MenuCatalog menuCatalog)            
+
+        public PizzaAdministationDialog(MenuCatalog menuCatalog)
         {
             _menuCatalog = menuCatalog;
         }
+
 
         public int UserMenu(List<string> menuList)
         {Console.Clear();

@@ -25,23 +25,19 @@ namespace PizzaStoreV02
 
         public Customer NewCustomer(Customer customer)
         {
-            try
-            {
-                Console.WriteLine("Enter the new customer's name:");
-                string customerName = Console.ReadLine();
-                Console.WriteLine("Enter the new customer's address:");
-                string customerAddress = Console.ReadLine();
-                Console.WriteLine("Enter the new customer's phone number:");
-                string customerPhoneNo = Console.ReadLine();
-                Customer newCustomer = new Customer(customerName, customerAddress, customerPhoneNo);
-                AddCustomer(newCustomer);
+
+                //Console.WriteLine("Enter the new customer's name:");
+                //string customerName = Console.ReadLine();
+                //Console.WriteLine("Enter the new customer's address:");
+                //string customerAddress = Console.ReadLine();
+                //Console.WriteLine("Enter the new customer's phone number:");
+                //string customerPhoneNo = Console.ReadLine();
+                //Customer newCustomer = new Customer(customerName, customerAddress, customerPhoneNo);
+                AddCustomer(customer);
                 return customer;
-            }
-            catch (FormatException) 
-            {
-                Console.WriteLine("Customer name and address must be filled"); //TODO exception virker ikke...
-            }
-            return null;
+            
+            throw new FormatException("Customer name and address must be filled");
+ 
         }
 
         public void DeleteCustomer(string Name) //TODO virker ikke....

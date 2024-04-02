@@ -34,10 +34,6 @@ namespace PizzaStoreV02
             customers.AddCustomer(c3);
 
             CustomerAdministrationDialog CustomerAdmin = new CustomerAdministrationDialog(customers);
-            //userDialog.UI();
-
-            //MainMenuManager mainMenu = new MainMenuManager(userDialog);
-            //mainMenu.MainMenu();
 
             
             bool proceed = true;

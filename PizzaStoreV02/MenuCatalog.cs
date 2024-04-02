@@ -20,15 +20,26 @@ namespace PizzaStoreV02
 
         public Pizza NewPizza(Pizza pizza) 
         {
+           bool creation = false;
             if (pizza.Price >= 0)
-            {
+            { 
                 _pizzas.Add(pizza);
-                return pizza;
-            }
-            if (pizza.Price < 0)
-            {
-                throw new FormatException("Pizza not created. \nPrice must be a positive number.");
+                creation = true;     
+                
+                if (creation)
+                {
+                    Pizza.ResetMenuNo();
+                    foreach (Pizza pi in _pizzas)
+                    {
+                        pi.MenuNo = Pizza.MenuNr();
+                    }
+                return pizza; 
+                }
 
+            if (pizza.Price < 0)
+                {
+                    throw new FormatException("Pizza not created. \nPrice must be a positive number.");
+                }
             }
             return null;
         }
