@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PizzaStoreV02
 {
-    public class MenuCatalog // TODO Lav CSS
+    public class MenuCatalog
     {
 
         private List<Pizza> _pizzas = new List<Pizza>();
@@ -18,81 +18,54 @@ namespace PizzaStoreV02
             _pizzas.Add(pizza);
         }
 
-        public Pizza NewPizza(Pizza pizza)
+        public Pizza NewPizza(Pizza pizza) 
         {
-            try
+            if (pizza.Price >= 0)
             {
-                
-                //Console.WriteLine("Choose new name:");
-                //pizza.Name = Console.ReadLine();
-                //Console.WriteLine("Choose new price:");
-                //pizza.Price = int.Parse(Console.ReadLine());
-                //Console.WriteLine();
-                
-                if (pizza.Price >= 0)
-                    {
-                    _pizzas.Add(pizza);
-                    Console.WriteLine("Pizza created successfully");
-                    return pizza;
-                    }
-                if (pizza.Price < 0)
-                {
-                    throw new Exception();
-                }
-                
+                _pizzas.Add(pizza);
+                return pizza;
             }
-            catch (FormatException e) 
+            if (pizza.Price < 0)
             {
-                Console.WriteLine(e.Message);                       // TODO "prøv igen"-funktion 
-            }                                                       // Ellers virker den
-            catch (Exception)
-            {
-                Console.WriteLine("Price must be a number > 0");
+                throw new FormatException("Pizza not created. \nPrice must be a positive number.");
+
             }
             return null;
         }
 
-                                        // Virker :-)
+
         public Pizza Delete(int number) 
         {
-            try
+            bool deletion = false;
+            foreach (Pizza p in _pizzas)
             {
-                bool deletion = false;
-                foreach (Pizza p in _pizzas)
+                Console.WriteLine(p.MenuNo);
+                if (p.MenuNo == number)
                 {
-                    if (p.MenuNo == number)
+                    _pizzas.Remove(p);
+
+                    deletion = true;
+
+                    if (deletion)
                     {
-                        _pizzas.Remove(p);
-                        Console.WriteLine($"You deleted pizza no. {p.MenuNo}. {p.Name}");
-                        
-                        deletion = true;
-                    
-                        if (deletion)
+                        Pizza.ResetMenuNo();
+                        foreach (Pizza pi in _pizzas)
                         {
-                            Pizza.ResetMenuNo();
-                            foreach (Pizza pi in _pizzas)
-                            {
-                                pi.MenuNo = Pizza.MenuNr();
-                            }
+                            pi.MenuNo = Pizza.MenuNr();
                         }
-                        return p;
                     }
+                    return p;
+                }   
+            }
+            if (!deletion)
+                { 
+                    throw new FormatException($"No pizza found with menu number {number}");
                 }
-                throw new Exception($"No pizza found with menu number {number}");
-            }
-            catch (FormatException e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
             return null;
         }
 
 
-        public void PrintMenu()
+        public void PrintMenu() 
         {
             foreach (Pizza p in _pizzas)
             {
@@ -100,59 +73,29 @@ namespace PizzaStoreV02
             }
         }
 
-        public Pizza Search(int number)
+        public Pizza Search(int number) 
         {
-            try
+            foreach (Pizza p in _pizzas)
             {
-                foreach (Pizza p in _pizzas)
+                if (p.MenuNo == number)
                 {
-                    if (p.MenuNo == number)
-                    {
-                        Console.WriteLine($"Name: {p.Name} \nPrice: {p.Price}");
-                        return p;
-                    }
+                    return p;
                 }
-                throw new Exception($"No pizza found with menu number {number}");
             }
-            catch (FormatException e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            return null;
+            throw new FormatException($"Search error - could not find pizza number {number}");
         }
 
 
-        public Pizza Update(int number)
+        public Pizza Update(int number) 
         {
-            try
+            foreach (Pizza p in _pizzas)
             {
-                foreach (Pizza p in _pizzas)
+                if (p.MenuNo == number)
                 {
-                    if (p.MenuNo == number)
-                        {
-                        Console.WriteLine("Choose new name:");
-                        p.Name = Console.ReadLine();
-                        Console.WriteLine("Choose new price:");
-                        p.Price = int.Parse(Console.ReadLine());
-                        Console.WriteLine();
-                        return p;
-                        }
+                    return p;
                 }
-                throw new Exception($"No pizza found with menu number {number}");
             }
-            catch (FormatException e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"Pizza not updated. {e.Message}");
-            }
-            return null;    
+            throw new FormatException($"No pizza found with menu number {number}");
         }
     }
 }

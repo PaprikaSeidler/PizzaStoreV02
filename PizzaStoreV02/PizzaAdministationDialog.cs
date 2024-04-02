@@ -4,20 +4,22 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace PizzaStoreV02
 {
-    public class UserDialog
+    public class PizzaAdministationDialog
     {
         private MenuCatalog _menuCatalog;
 
-        public UserDialog(MenuCatalog menuCatalog)
+        public PizzaAdministationDialog(MenuCatalog menuCatalog)            
         {
             _menuCatalog = menuCatalog;
         }
 
         public int UserMenu(List<string> menuList)
-        {
+        {Console.Clear();
             {
                 foreach (string choice in menuList)
                 {
@@ -40,9 +42,10 @@ namespace PizzaStoreV02
             }
         }
 
-        public void UI()
+        public void PizzaUI()
         {
-            Console.WriteLine();
+            
+
             bool proceed = true;
             List<string> UserMenuList = new List<string>()
             {
@@ -51,7 +54,7 @@ namespace PizzaStoreV02
                 "3. Create new pizza",
                 "4. Delete Pizza",
                 "5. Search Pizza",
-                "6. Exit program"
+                "6. Back to main menu"
             };
 
             while (proceed)
@@ -60,99 +63,117 @@ namespace PizzaStoreV02
 
                 switch (userChoice)
                 {
-                    case 1:
-                        Console.Clear();              // Virker :-)
+                    case 1: //Print menu
+                        Console.Clear();              
                         Console.WriteLine();
                         _menuCatalog.PrintMenu();
                         Console.WriteLine();
+                        Console.WriteLine("Press any key to return to menu.");
+                        Console.ReadKey();
                         break;
 
-                    case 2:                         // TODO Lav "tilbage-knap"
-                                                    
-
+                    case 2: //Update                         
                         try
                         {
                             Console.Clear();
                             Console.WriteLine("Choose pizza no. to update:");
                             int userInput1 = int.Parse(Console.ReadLine());
-                            _menuCatalog.Update(userInput1);                    // Virker :-)
+                            Pizza p = _menuCatalog.Update(userInput1);
+
+                            Console.WriteLine("Choose new name:");
+                            p.Name = Console.ReadLine();
+                            Console.WriteLine("Choose new price:");
+                            p.Price = int.Parse(Console.ReadLine());
+                            Console.WriteLine();
+
                             _menuCatalog.PrintMenu();
                             Console.WriteLine();
                         }
-                        catch (Exception e)
+                        catch (FormatException e)
                         {
-                            Console.WriteLine($"Pizza not updated.\n {e.Message}");
+                            Console.WriteLine(e.Message);
                         }
+                        Console.WriteLine();
+                        Console.WriteLine("Press any key to return to menu.");
+                        Console.ReadKey();
                         break;
 
-                    case 3:
+                    case 3: //New pizza
 
                         try
                         {
                             Console.Clear();
-                            //Console.WriteLine("To create new pizza press Enter:");  // Virker :-)
-                            //Pizza userInput2 =  Pizza.Parse(Console.ReadLine());
-                            //_menuCatalog.NewPizza(userInput2);
-                            //Console.WriteLine();
-                            //_menuCatalog.PrintMenu();                        
-                            //Console.WriteLine();
                             Console.WriteLine("Enter the new pizza name:");
                             string pizzaName = Console.ReadLine();
                             Console.WriteLine("Enter the new pizza price:");
                             int pizzaPrice = int.Parse(Console.ReadLine());
                             Pizza newPizza = new Pizza(pizzaName, pizzaPrice);
-                            _menuCatalog.NewPizza(newPizza);
+                            Pizza p = _menuCatalog.NewPizza(newPizza);
+                            Console.WriteLine("Pizza created successfully");
 
                             Console.WriteLine();
                             Console.WriteLine("New menu:");
                             _menuCatalog.PrintMenu();
                             Console.WriteLine();
-
-
                         }
-                        catch (Exception e)
+                        catch (FormatException e)
                         {
-                            Console.WriteLine($"Pizza not created.\n {e.Message}");
+                            Console.WriteLine(e.Message);
                         }
+                        Console.WriteLine();
+                        Console.WriteLine("Press any key to return to menu.");
+                        Console.ReadKey();
                         break;
 
-                    case 4:                                                 // Virker :-)
+                    case 4: //Delete                                        
+                            
                         try
                         {
                             Console.Clear();
+                            _menuCatalog.PrintMenu();
+                            Console.WriteLine();
+
                             Console.WriteLine("Choose pizza to delete:");
                             int userInput3 = int.Parse(Console.ReadLine());
-                            _menuCatalog.Delete(userInput3);
+                            Pizza p = _menuCatalog.Delete(userInput3);
+                            Console.WriteLine($"You deleted pizza no. {p.MenuNo}. {p.Name}");
+                            
                             Console.WriteLine();
                             Console.WriteLine("New menu:");
                             _menuCatalog.PrintMenu();
                             Console.WriteLine();
                         }
-                        catch (Exception e)
+                        catch (FormatException e)
                         {
-                            Console.WriteLine($"Pizza not deleted. \n" +
-                                              $"{e.Message}");
-                        }
+                            Console.WriteLine(e.Message);
+                        }    
+
+                        Console.WriteLine();
+                        Console.WriteLine("Press any key to return to menu.");
+                        Console.ReadKey();
                         break;
 
-                    case 5:                                                 // Virker :-)
+                    case 5: //Search                                                
                         try
                         {
                             Console.Clear();
                             Console.WriteLine("Search for a pizza by menu no.:");
                             int userInput4 = int.Parse(Console.ReadLine());
-                            _menuCatalog.Search(userInput4);
+                            Pizza p =_menuCatalog.Search(userInput4);
+                            Console.WriteLine($"Name: {p.Name} \nPrice: {p.Price}");
                             Console.WriteLine();
                         }
-                        catch (Exception e)
+                        catch (FormatException e)
                         {
-                            Console.WriteLine($"Search error.\n {e.Message}");
+                            Console.WriteLine(e.Message);
                         }
-
+                        Console.WriteLine();
+                        Console.WriteLine("Press any key to return to menu.");
+                        Console.ReadKey();
                         break;
 
-                    case 6:
-                        proceed = false;                                    // Virker :-)
+                    case 6: //Back
+                        proceed = false;                                    
                         Console.Clear();
                         break;
 

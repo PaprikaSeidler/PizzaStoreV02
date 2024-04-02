@@ -19,10 +19,9 @@ namespace PizzaStoreV02
          public Pizza(string name, int price)
          {
              Name = name;
+             Price = price;
              MenuNo = _menuNo;
              MenuNr();
-            
-             Price = price;
          }
 
         public Pizza() 
