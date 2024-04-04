@@ -22,19 +22,6 @@ namespace PizzaStoreV02
             Menu.AddToMenu(p3);
 
             PizzaAdministationDialog PizzaAdmin = new PizzaAdministationDialog(Menu);
-
-            //CustomerCatalog customers = new CustomerCatalog();
-
-            //Customer c1 = new Customer("Den sultne pige", "Pizza Allé 35", "25419814");
-            //Customer c2 = new Customer("Cheddar the Corgi", "Corgislev 98", "45682478");
-            //Customer c3 = new Customer("Charlie-dregnen", "Corgislev 118", "55448844");
-
-            //customers.AddCustomer(c1);
-            //customers.AddCustomer(c2);
-            //customers.AddCustomer(c3);
-
-            //CustomerAdministrationDialog CustomerAdmin = new CustomerAdministrationDialog(customers);
-
             
             bool proceed = true;
             List<string> MainMenuList = new List<string>()
@@ -55,7 +42,7 @@ namespace PizzaStoreV02
                 }
                 Console.WriteLine("----------------------------------");
                 Console.WriteLine("Choose option:");
-                int input = int.Parse(Console.ReadLine()); //Crasher i stedet for FormatExeption....
+                int input = int.Parse(Console.ReadLine());
 
                 try
                 {
@@ -67,7 +54,6 @@ namespace PizzaStoreV02
 
                         case 2:
                             Console.Clear();
-                            // CustomerAdmin.CustomerUI();
                             Console.WriteLine("To be implemented");
                             Console.WriteLine();
                             Console.WriteLine("Press any key to return.");

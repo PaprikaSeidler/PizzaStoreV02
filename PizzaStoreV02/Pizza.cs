@@ -42,7 +42,6 @@ namespace PizzaStoreV02
             return _menuNo;
         }
 
-        //ToString udskriver navn og pris for en pizza
         public override string ToString()
         {
             return $"No.: {MenuNo}. {Name}, {Price} kr.";
