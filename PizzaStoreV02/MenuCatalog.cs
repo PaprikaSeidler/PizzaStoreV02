@@ -50,6 +50,7 @@ namespace PizzaStoreV02
             bool deletion = false;
             foreach (Pizza p in _pizzas)
             {
+
                 if (p.MenuNo == number)
                 {
                     _pizzas.Remove(p);
