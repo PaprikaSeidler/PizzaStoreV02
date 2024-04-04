@@ -23,17 +23,17 @@ namespace PizzaStoreV02
 
             PizzaAdministationDialog PizzaAdmin = new PizzaAdministationDialog(Menu);
 
-            CustomerCatalog customers = new CustomerCatalog();
+            //CustomerCatalog customers = new CustomerCatalog();
 
-            Customer c1 = new Customer("Den sultne pige", "Pizza Allé 35", "25419814");
-            Customer c2 = new Customer("Cheddar the Corgi", "Corgislev 98", "45682478");
-            Customer c3 = new Customer("Charlie-dregnen", "Corgislev 118", "55448844");
+            //Customer c1 = new Customer("Den sultne pige", "Pizza Allé 35", "25419814");
+            //Customer c2 = new Customer("Cheddar the Corgi", "Corgislev 98", "45682478");
+            //Customer c3 = new Customer("Charlie-dregnen", "Corgislev 118", "55448844");
 
-            customers.AddCustomer(c1);
-            customers.AddCustomer(c2);
-            customers.AddCustomer(c3);
+            //customers.AddCustomer(c1);
+            //customers.AddCustomer(c2);
+            //customers.AddCustomer(c3);
 
-            CustomerAdministrationDialog CustomerAdmin = new CustomerAdministrationDialog(customers);
+            //CustomerAdministrationDialog CustomerAdmin = new CustomerAdministrationDialog(customers);
 
             
             bool proceed = true;

@@ -48,9 +48,5 @@ namespace PizzaStoreV02
             return $"No.: {MenuNo}. {Name}, {Price} kr.";
         }
 
-        public static Pizza Parse(string input)
-        {
-            return new Pizza();
-        }
     }
 }

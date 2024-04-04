@@ -68,7 +68,7 @@ namespace PizzaStoreV02
                     case 1: //Print menu
                         Console.Clear();              
                         Console.WriteLine();
-                        _menuCatalog.PrintMenu();
+                        _menuCatalog.PrintMenu(); 
                         Console.WriteLine();
                         Console.WriteLine("Press any key to return to menu.");
                         Console.ReadKey();
